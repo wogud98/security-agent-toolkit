@@ -32,11 +32,9 @@ def run_pipeline(config_path, today):                         # 설정 → 보�
     result = run_report(events, today)                        # 보고서를 만든다 — LLM 두 번
 
     approve = 0                                               # 사람 확인이 필요한 건수. 0 에서 시작
-    # 1. result["summaries"] 를 돌면서 notifier.needs_approval(s["risk_level"], config) 가 True 면 approve 에 1 을 더하세요
-    for s in result["summaries"]:
-        if notifier.needs_approval(s["risk_level"], config):
-            approve += 1
-
+    for s in result["summaries"]:                             # 정렬된 요약을 하나씩
+        if notifier.needs_approval(s["risk_level"], config):  # 사람에게 확인받을 위험도면
+            approve = approve + 1                             # 하나 센다
 
     # 알림으로 보낼 한 줄
     message = f"[보고서] {result['filename']} 저장 · 사람 확인 필요 {approve}건"
@@ -44,7 +42,5 @@ def run_pipeline(config_path, today):                         # 설정 → 보�
     print(message)                                            # 보낸 알림을 화면에도 보여 준다
 
 
-# 2. 이 파일을 python pipeline.py 로 직접 실행할 때만 아래 줄이 돌도록 if __name__ == "__main__": 을 쓰세요
-if __name__ == "__main__":
-    # 3. run_pipeline("config.json", str(date.today())) 를 실행하세요
-    run_pipeline("config.json", str(date.today()))
+if __name__ == "__main__":                                    # python pipeline.py 로 직접 실행할 때만
+    run_pipeline("config.json", str(date.today()))            # 오늘 날짜로 처음부터 끝까지 돌린다

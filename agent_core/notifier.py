@@ -22,13 +22,9 @@ def needs_approval(severity, config):                         # 사람에게 확
 
 
 def notify(message, url):                                     # 메시지를 알림 서버로 보내는 함수
-    # 1. try 안에서 url 로 {"text": message} 를 POST 하고(timeout=5) True 를 return 하세요
-    try :
-        requests.post(url, {"text":message}, timeout=5)
-        return True
-    # 2. except Exception as e: 를 쓰고, 아래 출력 줄 다음에 False 를 return 하세요
-    except Exception as e:
-        # ── 미리 채운 줄 — except 안에 들어가도록 들여쓰기가 맞춰져 있습니다 ──
+    try:                                                      # 아래 줄을 해 본다
+        requests.post(url, json={"text": message}, timeout=5)  # 메시지를 POST 한다 — 5초만 기다린다
+        return True                                           # 보냈다
+    except Exception as e:                                    # 에러가 나면 e 에 담아 여기로 온다
         print("[알림 실패]", type(e).__name__)                    # 에러 이름을 알린다 — 숨기지 않는다
-        return False
-
+        return False                                          # 못 보냈다 — 부른 쪽은 계속 간다
