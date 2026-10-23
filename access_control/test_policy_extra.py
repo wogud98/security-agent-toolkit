@@ -10,6 +10,7 @@ ok, reason = evaluate_access("dami", "SALES", "QUERY", at("2026-10-22 14:00"))  
 assert ok == False and reason == "퇴사한 계정", "5. 퇴사자는 예외가 있어도 거부"
 print("5 통과")                                                  # 5번 assert 를 지났다고 알린다
 
+
 ok, reason = evaluate_access("seoyeon", "SETTLE", "QUERY", at("2026-10-22 18:00"))      # 6. 팀원 제안: 만료 정각에도 허용되어야 한다
 assert ok == True, "6. 만료 정각에도 허용되어야 한다(팀원 제안)"
 print("6 통과")                                                  # 6번 assert 를 지났다고 알린다
