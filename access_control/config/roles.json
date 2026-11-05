@@ -3,5 +3,6 @@
   "account_admin": ["ACCOUNT:QUERY", "ACCOUNT:CHANGE"],
   "finance": ["SALES:QUERY", "SETTLE:QUERY"],
   "batch": ["SETTLE:QUERY"],
-  "auditor": ["SALES:QUERY", "SETTLE:QUERY", "ACCOUNT:QUERY"]
+  "auditor": ["SALES:QUERY", "SETTLE:QUERY", "ACCOUNT:QUERY"],
+  "developer":["ACCOUNT:QUERY"]
 }
